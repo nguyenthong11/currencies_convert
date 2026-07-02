@@ -58,7 +58,7 @@ def _fmt(code):
 
 # --- FIX STEP 1: Initialize the widget keys directly in session state ---
 if "base_currency" not in st.session_state:
-    st.session_state.base_currency = "EUR" if "EUR" in currency_codes else currency_codes[0]
+    st.session_state.base_currency = "XAU" if "XAU" in currency_codes else currency_codes[0]
 if "target_currency" not in st.session_state:
     st.session_state.target_currency = "USD" if "USD" in currency_codes else currency_codes[1]
 
