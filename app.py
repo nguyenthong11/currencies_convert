@@ -9,11 +9,12 @@ from convert import convert
 
 # Load environment variables from .env file
 load_dotenv()
-
+# Database path
+db_path = os.getenv("DB_PATH", "currency_cache.db")
 # --- One-time per-session initialization ---
 @st.cache_resource
 def _initialize_app():
-    init_db.init_db()
+    init_db.init_db(db_path=db_path)
 
 
 _initialize_app()
@@ -21,7 +22,7 @@ _initialize_app()
 
 @st.cache_data
 def _load_symbols():
-    return get_all_symbols()
+    return get_all_symbols(db_path=db_path)
 
 
 # Set up the Streamlit app

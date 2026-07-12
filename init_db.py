@@ -6,11 +6,12 @@ from dotenv import load_dotenv
 # Load .env so init_db works whether run standalone or via the app
 load_dotenv()
 
-def init_db(db_path='currency_cache.db'):
+def init_db(db_path=None):
     """
     Initialize the SQLite database and cache currency symbols from Fixer.io API.
     Idempotent: safe to call repeatedly — only fetches when the symbols table is empty.
     """
+    db_path = os.getenv("DB_PATH", "currency_cache.db")
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
