@@ -31,10 +31,10 @@ st.title("💱 Currency Converter")
 st.markdown("Convert currencies using the latest exchange rates from Fixer.io")
 
 # Get the access key from environment variable
-access_key = os.getenv("FIXER_IO_ACCESS_KEY")
+access_key = st.secrets["FIXER_IO_ACCESS_KEY"]
 if not access_key:
     st.warning(
-        "⚠️ Fixer.io API key not found. Please set the FIXER_IO_ACCESS_KEY environment variable in a .env file."
+        "⚠️ Fixer.io API key not found. Please set the FIXER_IO_ACCESS_KEY secret in your app settings."
     )
     st.info("Get a free API key at https://fixer.io/")
     api_key_available = False

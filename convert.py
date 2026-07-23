@@ -5,9 +5,7 @@ Run with: python convert.py
 import os
 import time
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()
+from streamlit import secrets
 
 # --- Simple in-memory cache with TTL ---
 _CONVERSION_CACHE: dict[tuple, tuple[dict, float]] = {}
@@ -36,9 +34,9 @@ def _set_cached(key: tuple, result: dict) -> None:
 
 
 def _get_access_key() -> str:
-    access_key = os.getenv('FIXER_IO_ACCESS_KEY')
+    access_key = secrets.get("FIXER_IO_ACCESS_KEY")
     if not access_key:
-        raise RuntimeError("FIXER_IO_ACCESS_KEY is not set in .env or environment")
+        raise RuntimeError("FIXER_IO_ACCESS_KEY is not set in the environment")
     return access_key
 
 

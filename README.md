@@ -10,7 +10,7 @@ A simple, clean currency converter built with Streamlit, SQLite, and the Fixer.i
 - **In-memory caching** with 24-hour TTL for conversion results to reduce API calls
 - User-friendly interface with dropdowns, numeric input, and a **Swap currencies** button
 - Error handling for missing API keys, invalid requests, network errors, and timeouts
-- Configuration via `.env` file for API key management
+- Configuration via `.streamlit/secrets.toml` file for API key management
 
 ## Setup
 
@@ -21,9 +21,9 @@ A simple, clean currency converter built with Streamlit, SQLite, and the Fixer.i
    pip install -r requirements.txt
    ```
 
-3. **Get a free API key from [Fixer.io](https://fixer.io/)** and set it in a `.env` file:
-   ```bash
-   echo "FIXER_IO_ACCESS_KEY=your_api_key_here" > .env
+3. **Get a free API key from [Fixer.io](https://fixer.io/)** and set it in a `.streamlit/secrets.toml` file:
+   ```toml
+   FIXER_IO_ACCESS_KEY = "your_api_key_here"
    ```
    Alternatively, export it as an environment variable:
    ```bash
@@ -59,7 +59,7 @@ python convert.py
 - `init_db.py`: Initializes the SQLite database and caches currency symbols from Fixer.io (idempotent)
 - `db_helper.py`: Helper functions for database operations (fetching symbols, checking currency support)
 - `requirements.txt`: Python dependencies (streamlit, requests, python-dotenv)
-- `.env`: Environment variables (API key) - **not committed to git**
+- `.streamlit/secrets.toml`: Environment variables (API key) - **not committed to git**
 - `currency_cache.db`: SQLite database caching currency symbols (auto-generated)
 
 ## How It Works
@@ -80,8 +80,8 @@ The database is initialized automatically on first app run via `@st.cache_resour
 
 ## Troubleshooting
 
-- **No currency symbols showing**: Check your Fixer.io API key in `.env` and internet connection. Run `python init_db.py` to see detailed errors.
-- **Conversion fails**: Ensure `FIXER_IO_ACCESS_KEY` is set correctly in `.env`. Check network connectivity.
+- **No currency symbols showing**: Check your Fixer.io API key in `.streamlit/secrets.toml` and internet connection. Run `python init_db.py` to see detailed errors.
+- **Conversion fails**: Ensure `FIXER_IO_ACCESS_KEY` is set correctly in `.streamlit/secrets.toml`. Check network connectivity.
 - **Database errors**: Make sure you have write permissions in the directory.
 - **Stale rates**: The free tier of Fixer.io updates rates once per day. The app's in-memory cache also has a 24-hour TTL.
 
