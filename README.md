@@ -80,7 +80,7 @@ The database is initialized automatically on first app run via `@st.cache_resour
 
 ## Troubleshooting
 
-- **No currency symbols showing**: Check your Fixer.io API key in `.streamlit/secrets.toml` and internet connection. Run `python init_db.py` to see detailed errors.
+- **No currency symbols showing**: Run `python init_db.py` to see detailed errors.
 - **Conversion fails**: Ensure `FIXER_IO_ACCESS_KEY` is set correctly in `.streamlit/secrets.toml`. Check network connectivity.
 - **Database errors**: Make sure you have write permissions in the directory.
 - **Stale rates**: The free tier of Fixer.io updates rates once per day. The app's in-memory cache also has a 24-hour TTL.
